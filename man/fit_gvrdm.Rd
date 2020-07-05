@@ -19,6 +19,7 @@ fit_gvrdm(
   tt3 = NA,
   tt4 = NA,
   Ke,
+  Ke.trans = FALSE,
   Eb,
   angle = NA,
   kd = NA,
@@ -67,6 +68,8 @@ fit_gvrdm(
 \item{tt4}{T parameter for prey type 4. Default = NA}
 
 \item{Ke}{Half-saturation constant}
+
+\item{Ke.trans}{Should Ke be transformed in the model?}
 
 \item{Eb}{# Light level}
 

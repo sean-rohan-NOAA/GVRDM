@@ -19,6 +19,7 @@ NLL_dynamic_contrast(
   tt3 = NA,
   tt4 = NA,
   Ke,
+  Ke.trans = FALSE,
   Eb,
   angle = NA,
   kd = NA,
@@ -35,7 +36,7 @@ NLL_dynamic_contrast(
   fit.model = TRUE,
   fit.obs = TRUE,
   ccoffset = NA,
-  silent = FALSE,
+  silent = F,
   ...
 )
 }
@@ -67,6 +68,8 @@ NLL_dynamic_contrast(
 \item{tt4}{T parameter for prey type 4. Default = NA}
 
 \item{Ke}{Half-saturation constant}
+
+\item{Ke.trans}{Should Ke be transformed in the model?}
 
 \item{Eb}{# Light level}
 
@@ -105,5 +108,5 @@ NLL_dynamic_contrast(
 \item{return}{If fit.model is TRUE, returns the negative log likelihood. If fit is FALSE, returns model diagnostics and predictions using parameters that are passed to the model.}
 }
 \description{
-Generalized visual reaction distance model and Aksnes and Utne model. Identical to fit_gvrdm. Included for backward compatibility.
+Generalized visual reaction distance model and Aksnes and Utne model
 }

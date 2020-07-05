@@ -1,10 +1,11 @@
 #' Function for fitting the GVRDM and Aksnes and Utne model
 #' 
-#' Generalized visual reaction distance model and Aksnes and Utne model
+#' Generalized visual reaction distance model and Aksnes and Utne model.
 #' 
 #' @param rr Reaction distance
 #' @param cc Effective attenuation coefficient or beam attenuation coefficient
 #' @param Ke Half-saturation constant
+#' @param Ke.trans Should Ke be transformed in the model?
 #' @param Eb # Light level
 #' @param Ap Prey area. If Ap and C0 are not provided, tt will be estimated.
 #' @param C0 Prey inherent contrast. If Ap and C0 are not provided, tt will be estimated.
@@ -49,6 +50,7 @@ fit_gvrdm <- function(rr,
                                  tt3 = NA,
                                  tt4 = NA,
                                  Ke,
+                                 Ke.trans = FALSE,
                                  Eb,
                                  angle = NA,
                                  kd = NA,
@@ -72,6 +74,11 @@ fit_gvrdm <- function(rr,
   out <- vector(length = length(cc))
   VIS <- 1:length(cc)
   
+  # Transform Ke?
+  if(Ke.trans == TRUE) {
+    Ke <- 10^Ke
+  }
+  
   # Offset beam attenuation?
   if(is.na(ccoffset)) {
     ccoffset <- 0
@@ -91,30 +98,23 @@ fit_gvrdm <- function(rr,
   # Split visual and Non-visual reaction distance
   if(!is.na(NVrd)) {
     VIS <- which(Eb > NVthreshold)
-    
   }
   
   # Non-visual reaction distance
   out[-VIS] <- NVrd
   
   # Assign separate tt for each prey type
-  if(is.na(tt1)) {
+  
+  # Multiple prey types
+  tt_vars <- ls()[grepl("tt", ls())]
+  tt_vars <- sapply(tt_vars, function(x) eval(parse(text=x)))
+  if(length(tt_vars) == 1) {
     tt <- rep(tt, length(rr))
   } else {
-    tvec <- rep(0, length(prey))
-    tvec[prey == prey.types[1]] <- tt
-    tvec[prey == prey.types[2]] <- tt1
-    if(!is.na(tt2)) {
-      tvec[prey == prey.types[3]] <- tt2
-      if(!is.na(tt3)) {
-        tvec[prey == prey.types[4]] <- tt3
-      }
-      if(!is.na(tt4)) {
-        tvec[prey == prey.types[5]] <- tt4
-      }
-    }
-    tt <- tvec
+    tt_vec <- match(prey, prey.types)
+    tt_vec <- tt_vars[tt_vec]
   }
+  tt <- tt_vec
   
   # Size multiplier
   if(!is.na(prey.size[1])) {
