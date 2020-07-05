@@ -1,2 +1,2 @@
 # GVRDM
-Generalized model of visual reaction distance
+Functions and code for the generalized visual reaction distance model (GVRDM) and other visual encounter distance models.
