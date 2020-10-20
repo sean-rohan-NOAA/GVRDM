@@ -52,6 +52,11 @@ fit_eval <- function(dat, mod, Ke = NA, alpha = NA, sigma = NA, NVthreshold = NA
     dat$angle <- NA
   }
   
+  if(is.null(dat$Ke.trans)) {
+    warning("No Ke.trans found in dat. Setting Ke.trans to FALSE")
+    dat$Ke.trans <- FALSE
+  }
+  
   mod_fit <- NLL_dynamic_contrast(rr = dat$rr, 
                        cc = dat$cc,
                        tt = parid["tt"],

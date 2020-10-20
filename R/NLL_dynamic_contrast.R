@@ -104,15 +104,16 @@ NLL_dynamic_contrast <- function(rr,
   out[-VIS] <- NVrd
   
   # Assign separate tt for each prey type
-  tt_vars <- ls()[grepl("tt", ls())]
-  tt_vars <- sapply(tt_vars, function(x) eval(parse(text=x)))
-  if(length(tt_vars) == 1) {
+  if(length(prey.types) > 1) {
+    tt_vars <- ls()[grepl("tt", ls())]
+    tt_vars <- sapply(tt_vars, function(x) eval(parse(text=x)))
     tt <- rep(tt, length(rr))
-  } else {
     tt_vec <- match(prey, prey.types)
     tt_vec <- tt_vars[tt_vec]
+    tt <- tt_vec
+  } else {
+    tt <- rep(tt, length(rr))
   }
-  tt <- tt_vec
   
   # Size multiplier
   if(!is.na(prey.size[1])) {

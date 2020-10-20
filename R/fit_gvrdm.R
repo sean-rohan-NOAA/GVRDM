@@ -2,7 +2,7 @@
 #' 
 #' Generalized visual reaction distance model and Aksnes and Utne model.
 #' 
-#' @param rr Reaction distance
+#' @param rr Reaction distance in meters
 #' @param cc Effective attenuation coefficient or beam attenuation coefficient
 #' @param Ke Half-saturation constant
 #' @param Ke.trans Should Ke be transformed in the model?
@@ -35,6 +35,7 @@
 #' @param fit.obs Logical. Should observations be used to calculate a likelihood?
 #' @param silent Logical. Should diagnostic plots be produced?
 #' @param return If fit.model is TRUE, returns the negative log likelihood. If fit is FALSE, returns model diagnostics and predictions using parameters that are passed to the model.
+#' @details The order of composite tt parameters should match the order of prey.types in the model. By default, the model is set up to estimate five prey parameters (tt, tt1, tt2, tt3, tt4). Additional parameters can be added by modifying the function with additional numbered parameters that have names beginning with tt. Regardless of how many tt parameters are added, only parameters that are assigned values and have a corresponding prey category will be estimated by the model.
 
 fit_gvrdm <- function(rr,
                                  cc,
@@ -104,17 +105,17 @@ fit_gvrdm <- function(rr,
   out[-VIS] <- NVrd
   
   # Assign separate tt for each prey type
-  
   # Multiple prey types
-  tt_vars <- ls()[grepl("tt", ls())]
-  tt_vars <- sapply(tt_vars, function(x) eval(parse(text=x)))
-  if(length(tt_vars) == 1) {
+  if(length(prey.types) > 1) {
+    tt_vars <- ls()[grepl("tt", ls())]
+    tt_vars <- sapply(tt_vars, function(x) eval(parse(text=x)))
     tt <- rep(tt, length(rr))
-  } else {
     tt_vec <- match(prey, prey.types)
     tt_vec <- tt_vars[tt_vec]
+    tt <- tt_vec
+  } else {
+    tt <- rep(tt, length(rr))
   }
-  tt <- tt_vec
   
   # Size multiplier
   if(!is.na(prey.size[1])) {
@@ -202,6 +203,7 @@ fit_gvrdm <- function(rr,
   } else {
     if(fit.obs) {
       if(!is.na(NVrd)) {
+        out[out < NVrd & Eb <= NVthreshold] <- NVrd
       }
       if(!silent) {
         out <- list(out = out, 

@@ -41,7 +41,7 @@ fit_gvrdm(
 )
 }
 \arguments{
-\item{rr}{Reaction distance}
+\item{rr}{Reaction distance in meters}
 
 \item{cc}{Effective attenuation coefficient or beam attenuation coefficient}
 
@@ -108,5 +108,8 @@ fit_gvrdm(
 \item{return}{If fit.model is TRUE, returns the negative log likelihood. If fit is FALSE, returns model diagnostics and predictions using parameters that are passed to the model.}
 }
 \description{
-Generalized visual reaction distance model and Aksnes and Utne model
+Generalized visual reaction distance model and Aksnes and Utne model.
+}
+\details{
+The order of composite tt parameters should match the order of prey.types in the model. By default, the model is set up to estimate five prey parameters (tt, tt1, tt2, tt3, tt4). Additional parameters can be added by modifying the function with additional numbered parameters that have names beginning with tt. Regardless of how many tt parameters are added, only parameters that are assigned values and have a corresponding prey category will be estimated by the model.
 }

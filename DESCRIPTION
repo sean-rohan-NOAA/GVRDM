@@ -1,7 +1,7 @@
 Package: GVRDM
 Type: Package
 Title: Visual reaction distance models
-Version: 0.0.1
+Version: 0.0.5
 Authors@R: person("Sean K.", "Rohan", email = "sean.rohan@noaa.gov", role = c("aut", "cre"))
 Maintainer: Sean K. Rohan <sean.rohan@noaa.gov>
 Description: Models of visual reaction distance and data.
