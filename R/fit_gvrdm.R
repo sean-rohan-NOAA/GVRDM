@@ -203,7 +203,7 @@ fit_gvrdm <- function(rr,
   } else {
     if(fit.obs) {
       if(!is.na(NVrd)) {
-        out[out < NVrd & Eb <= NVthreshold] <- NVrd
+        out[Eb <= NVthreshold] <- NVrd
       }
       if(!silent) {
         out <- list(out = out, 
@@ -213,7 +213,7 @@ fit_gvrdm <- function(rr,
       }
     } else {
       if(!is.na(NVrd)) {
-        out[out < NVrd & Eb <= NVthreshold] <- NVrd
+        out[Eb <= NVthreshold] <- NVrd
       }
       prediction_plots(cc = cc, Eb = Eb, out = out)
     }
