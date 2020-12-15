@@ -36,6 +36,7 @@ fit_gvrdm(
   fit.model = TRUE,
   fit.obs = TRUE,
   ccoffset = NA,
+  only.estimate = FALSE,
   silent = F,
   ...
 )
@@ -100,6 +101,8 @@ fit_gvrdm(
 \item{fit.obs}{Logical. Should observations be used to calculate a likelihood?}
 
 \item{ccoffset}{Shift kappa or beam attenuation? Default = NA results in no shift.}
+
+\item{only.estimate}{Logical. Should only the estimated reaction distance be returned?}
 
 \item{silent}{Logical. Should diagnostic plots be produced?}
 

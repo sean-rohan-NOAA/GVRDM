@@ -34,6 +34,7 @@
 #' @param fit.model Logical.Should the model be fitted? If FALSE, produces model diagnostics and predictions based on provided parameters.
 #' @param fit.obs Logical. Should observations be used to calculate a likelihood?
 #' @param silent Logical. Should diagnostic plots be produced?
+#' @param only.estimate Logical. Should only the estimated reaction distance be returned?
 #' @param return If fit.model is TRUE, returns the negative log likelihood. If fit is FALSE, returns model diagnostics and predictions using parameters that are passed to the model.
 #' @details The order of composite tt parameters should match the order of prey.types in the model. By default, the model is set up to estimate five prey parameters (tt, tt1, tt2, tt3, tt4). Additional parameters can be added by modifying the function with additional numbered parameters that have names beginning with tt. Regardless of how many tt parameters are added, only parameters that are assigned values and have a corresponding prey category will be estimated by the model.
 
@@ -68,6 +69,7 @@ fit_gvrdm <- function(rr,
                                  fit.model = TRUE,
                                  fit.obs = TRUE,
                                  ccoffset = NA,
+                                 only.estimate = FALSE,
                                  silent = F, ...) {
   # Initialize output vectors
   rhs <- vector(length = length(cc))
@@ -231,8 +233,11 @@ fit_gvrdm <- function(rr,
       out$angle <- angle
       out$kd <- kd
     }
-    
-    return(out)
+    if(only.estimate) {
+      return(out$out) # Only return fitted reaction distances
+    } else{
+      return(out)
+    }
   }
   
 }
