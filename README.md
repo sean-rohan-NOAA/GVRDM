@@ -9,7 +9,7 @@ To install GVRDM, open R and run the code below. Installation requires the devto
 
 ```
 require(devtools)
-install_github("sean-rohan/trawllight")
+install_github("sean-rohan-NOAA/GVRDM")
 ```
 
 # References
