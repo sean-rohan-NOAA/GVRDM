@@ -1,5 +1,16 @@
 # GVRDM
-Functions for modeling visual predator-predator prey interactions using the generalized visual reaction distance model (Rohan et al., Accepted).
+An R package for modeling visual predator-predator prey interactions using the generalized visual reaction distance model (Rohan et al., Accepted).
+
+The most recent version of GVRDM was built in R 4.0.4.
+
+# Installation
+
+To install GVRDM, open R and run the code below. Installation requires the devtools package.
+
+```
+require(devtools)
+install_github("sean-rohan/trawllight")
+```
 
 # References
 Rohan, S.K., Beauchamp, D.A., Essington, T.E., Hansen, A.G. _Accepted_. Merging empirical and mechanistic approaches to modeling aquatic visual foraging using a generalizable visual reaction distance model. Ecological Modeling.
