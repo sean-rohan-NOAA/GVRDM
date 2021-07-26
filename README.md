@@ -1,8 +1,8 @@
 # GVRDM
-Functions for modeling visual predator-predator prey interactions using the generalized visual reaction distance model (Rohan et al., In revision).
+Functions for modeling visual predator-predator prey interactions using the generalized visual reaction distance model (Rohan et al., Accepted).
 
 # References
-Rohan, S.K., Beauchamp, D.A., Essington, T.E., Hansen, A.G. _In revision_. Merging empirical and mechanistic approaches to modeling aquatic visual foraging using a generalizable visual reaction distance model. Ecological Modeling.
+Rohan, S.K., Beauchamp, D.A., Essington, T.E., Hansen, A.G. _Accepted_. Merging empirical and mechanistic approaches to modeling aquatic visual foraging using a generalizable visual reaction distance model. Ecological Modeling.
 
 ### Legal disclaimer
 
